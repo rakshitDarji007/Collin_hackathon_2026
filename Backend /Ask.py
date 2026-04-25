@@ -1,1 +1,2 @@
-print('How many tasks would you like to add: ')
+tasks=('How many tasks would you like to add: ')
+print
