@@ -14,6 +14,6 @@ while True:
     StoreUserInput.append(userInput)
     
     
-    counter += HowMany #store amont
+    counter += HowMany #store amount
     
 
