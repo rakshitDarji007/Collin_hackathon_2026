@@ -1,14 +1,15 @@
-html,body{
-  background-color:black;
-  margin:0%
-    height:100%;
-}
 #header{
-  font-size:10rem;
+  font-size:1rem;
   font-weight:550;
   letter-spacing:2px;
   font-family:'Inter',sans-serif;
-  color:gray;
+  color:rgb(0, 0, 0);
+}
+#task{
+  font-size:5rem;
+}
+#myText{
+  font-size:5rem;
 }
 #button-container{
   display:flex;
@@ -16,7 +17,7 @@ html,body{
   gap:16px;
   margin-top:20px;
 }
-#button, #tbutton, #dbutton{
+#button, #tbutton, #dbutton, #rbutton{
   width:150px;
   height:50px;
   font-size:1rem;

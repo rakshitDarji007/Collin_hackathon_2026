@@ -1,5 +1,9 @@
 // input button
 
-document.getElementById("mySubmit").onclick = function(){
-    
-}
+let MyTask;
+
+document.getElementById("button2").onclick = function(){
+    MyTask = document.getElementById("myText").value;
+    //document.getElementById("header").textContent = `${MyTask}`
+}   
+
