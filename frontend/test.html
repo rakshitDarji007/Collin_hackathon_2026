@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chronos - Weekly Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#00201d",
+                      "secondary-fixed-dim": "#6bd8cb",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "error-container": "#ffdad6",
+                      "tertiary": "#784b00",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#dce9ff",
+                      "on-secondary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "background": "#f8f9ff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "secondary-fixed": "#89f5e7",
+                      "surface-container-low": "#eff4ff",
+                      "surface-dim": "#cbdbf5",
+                      "primary": "#004ac6",
+                      "on-background": "#0b1c30",
+                      "surface": "#f8f9ff",
+                      "on-tertiary-fixed": "#2a1700",
+                      "on-surface-variant": "#434655",
+                      "inverse-primary": "#b4c5ff",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#d3e4fe",
+                      "inverse-surface": "#213145",
+                      "secondary-container": "#86f2e4",
+                      "surface-bright": "#f8f9ff",
+                      "outline-variant": "#c3c6d7",
+                      "on-tertiary-fixed-variant": "#653e00",
+                      "on-tertiary-container": "#ffeedd",
+                      "on-primary-fixed": "#00174b",
+                      "secondary": "#006a61",
+                      "primary-container": "#2563eb",
+                      "tertiary-container": "#996100",
+                      "primary-fixed": "#dbe1ff",
+                      "tertiary-fixed": "#ffddb8",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-container": "#eeefff",
+                      "on-secondary-container": "#006f66",
+                      "on-secondary-fixed-variant": "#005049",
+                      "tertiary-fixed-dim": "#ffb95f",
+                      "outline": "#737686",
+                      "surface-tint": "#0053db",
+                      "surface-container-highest": "#d3e4fe",
+                      "surface-container": "#e5eeff",
+                      "on-surface": "#0b1c30",
+                      "error": "#ba1a1a",
+                      "on-tertiary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "lg": "24px",
+                      "base": "4px",
+                      "sm": "8px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "container-margin": "24px",
+                      "grid-gutter": "1px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "display": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "12px",
+                                      "letterSpacing": "0.03em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-hidden">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md shadow-sm border-b border-slate-200 dark:border-slate-800 font-manrope text-sm font-medium">
+<div class="flex items-center justify-between w-full px-6 py-3 h-16">
+<!-- Left Side: Empty or Search Placeholder -->
+<div class="flex-1 flex items-center">
+<div class="relative w-64 hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="Search..." type="text"/>
+</div>
+<button class="sm:hidden p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+<!-- Center: Brand Logo -->
+<div class="flex-1 flex justify-center">
+<span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white mx-auto">To-Do</span>
+</div>
+<!-- Right Side: Actions -->
+<div class="flex-1 flex items-center justify-end gap-md">
+<button class="bg-primary text-on-primary font-label-md px-4 py-2 rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-all duration-200 shadow-sm active:scale-[0.98]">
+                    Add Task
+                </button>
+<div class="flex items-center gap-xs">
+</div>
+<div class="h-8 w-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden flex-shrink-0 cursor-pointer">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Close up portrait of a smiling professional man with short dark hair wearing a blue shirt against a neutral blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH8DZb6Kwj-icEiaEnpWAAmGVwJlx4q2eaqFG3k9Oz-YZ4YDyNI5-hZJbVG28jSkx7MLGiVhczXd5z0G_IIlEzmZtzx_omUVotXl4Z8b32B7-amN_mNUTtAh6SzKLEFafNoiAOE8J7rLetR0141R8zLaPX54X9SanzvsuLAa4j9f0P3dHxeILOngdG5oY0rEa5THbPOOHPa0p3FI9D2p-NE-Df5gsqHV0qm3mIrM7JYC2-6EiCpas0XZOSXSpco8fzeOepyD97yQQ"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar from JSON -->
+<aside class="w-[280px] h-screen fixed left-0 top-0 pt-20 bg-slate-50 dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 flex flex-col p-4 space-y-2 z-40 hidden md:flex font-manrope text-sm">
+<!-- Header -->
+<div class="flex items-center gap-sm mb-6 px-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary font-bold">
+                W
+            </div>
+<div>
+<div class="font-bold text-slate-900 dark:text-white">My Workspace</div>
+<div class="text-xs text-outline">Standard Plan</div>
+</div>
+</div>
+<!-- Main Navigation -->
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-sm px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 border-l-4 border-blue-600 rounded-r-lg cursor-pointer active:bg-slate-200 dark:active:bg-slate-800" href="#">
+<span class="material-symbols-outlined text-[20px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-medium">Calendar</span>
+</a>
+<a class="flex items-center gap-sm px-4 py-2 border-l-4 border-transparent text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors duration-150 rounded-r-lg cursor-pointer active:bg-slate-200 dark:active:bg-slate-800" href="#">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span class="font-medium">Tasks</span>
+</a>
+</nav>
+<!-- CTA -->
+<!-- Footer Navigation -->
+</aside>
+<!-- Main Content Area -->
+<main class="pt-16 md:pl-[280px] h-screen flex flex-col bg-surface overflow-hidden">
+<!-- Calendar Toolbar -->
+<div class="flex items-center justify-between px-lg py-4 border-b border-surface-variant bg-surface-bright flex-shrink-0">
+<div class="flex items-center gap-md">
+<h1 class="font-headline-md text-on-surface">October 2023</h1>
+<div class="flex items-center gap-xs ml-4">
+<button class="p-1 rounded-md text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded-md text-on-surface-variant font-label-md hover:bg-surface-container transition-colors">
+                        Today
+                    </button>
+<button class="p-1 rounded-md text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex bg-surface-container-low rounded-lg p-1 border border-outline-variant/50">
+<button class="px-3 py-1 text-on-surface-variant font-label-md rounded-md hover:text-on-surface transition-colors">Day</button>
+<button class="px-3 py-1 bg-surface-bright text-on-surface font-label-md rounded-md shadow-sm">Week</button>
+<button class="px-3 py-1 text-on-surface-variant font-label-md rounded-md hover:text-on-surface transition-colors">Month</button>
+</div>
+</div>
+</div>
+<!-- Calendar Grid Area -->
+<div class="flex-1 flex flex-col overflow-hidden bg-surface-bright relative">
+<!-- Days Header -->
+<div class="flex border-b border-surface-variant bg-surface-bright pr-4 flex-shrink-0">
+<!-- Time Column Spacer -->
+<div class="w-16 border-r border-surface-variant flex-shrink-0"></div>
+<!-- Days -->
+<div class="flex-1 grid grid-cols-7 gap-grid-gutter bg-surface-variant">
+<!-- Mon -->
+<div class="bg-surface-bright text-center py-3 flex flex-col items-center">
+<span class="text-on-surface-variant font-label-md uppercase">Mon</span>
+<span class="font-headline-md text-on-surface mt-1">16</span>
+</div>
+<!-- Tue -->
+<div class="bg-surface-bright text-center py-3 flex flex-col items-center">
+<span class="text-on-surface-variant font-label-md uppercase">Tue</span>
+<span class="font-headline-md text-on-surface mt-1">17</span>
+</div>
+<!-- Wed (Active) -->
+<div class="bg-surface-bright text-center py-3 flex flex-col items-center relative">
+<span class="text-primary font-label-md uppercase">Wed</span>
+<span class="font-headline-md text-on-primary bg-primary w-8 h-8 rounded-full flex items-center justify-center mt-1">18</span>
+</div>
+<!-- Thu -->
+<div class="bg-surface-bright text-center py-3 flex flex-col items-center">
+<span class="text-on-surface-variant font-label-md uppercase">Thu</span>
+<span class="font-headline-md text-on-surface mt-1">19</span>
+</div>
+<!-- Fri -->
+<div class="bg-surface-bright text-center py-3 flex flex-col items-center">
+<span class="text-on-surface-variant font-label-md uppercase">Fri</span>
+<span class="font-headline-md text-on-surface mt-1">20</span>
+</div>
+<!-- Sat -->
+<div class="bg-surface-bright text-center py-3 flex flex-col items-center opacity-70">
+<span class="text-on-surface-variant font-label-md uppercase">Sat</span>
+<span class="font-headline-md text-on-surface mt-1">21</span>
+</div>
+<!-- Sun -->
+<div class="bg-surface-bright text-center py-3 flex flex-col items-center opacity-70">
+<span class="text-on-surface-variant font-label-md uppercase">Sun</span>
+<span class="font-headline-md text-on-surface mt-1">22</span>
+</div>
+</div>
+</div>
+<!-- Scrollable Grid -->
+<div class="flex-1 overflow-y-auto overflow-x-hidden relative no-scrollbar bg-surface-variant">
+<div class="flex min-h-[800px]">
+<!-- Time Column -->
+<div class="w-16 flex-shrink-0 bg-surface-bright border-r border-surface-variant relative z-10">
+<div class="h-16 border-b border-surface-variant/50 relative">
+<span class="absolute -bottom-3 right-2 text-on-surface-variant font-label-sm">8 AM</span>
+</div>
+<div class="h-16 border-b border-surface-variant/50 relative">
+<span class="absolute -bottom-3 right-2 text-on-surface-variant font-label-sm">9 AM</span>
+</div>
+<div class="h-16 border-b border-surface-variant/50 relative">
+<span class="absolute -bottom-3 right-2 text-on-surface-variant font-label-sm">10 AM</span>
+</div>
+<div class="h-16 border-b border-surface-variant/50 relative">
+<span class="absolute -bottom-3 right-2 text-on-surface-variant font-label-sm">11 AM</span>
+</div>
+<div class="h-16 border-b border-surface-variant/50 relative">
+<span class="absolute -bottom-3 right-2 text-on-surface-variant font-label-sm">12 PM</span>
+</div>
+<div class="h-16 border-b border-surface-variant/50 relative">
+<span class="absolute -bottom-3 right-2 text-on-surface-variant font-label-sm">1 PM</span>
+</div>
+<div class="h-16 border-b border-surface-variant/50 relative">
+<span class="absolute -bottom-3 right-2 text-on-surface-variant font-label-sm">2 PM</span>
+</div>
+<div class="h-16 border-b border-surface-variant/50 relative">
+<span class="absolute -bottom-3 right-2 text-on-surface-variant font-label-sm">3 PM</span>
+</div>
+<div class="h-16 border-b border-surface-variant/50 relative">
+<span class="absolute -bottom-3 right-2 text-on-surface-variant font-label-sm">4 PM</span>
+</div>
+<div class="h-16 border-b border-surface-variant/50 relative">
+<span class="absolute -bottom-3 right-2 text-on-surface-variant font-label-sm">5 PM</span>
+</div>
+</div>
+<!-- Days Grid Content -->
+<div class="flex-1 grid grid-cols-7 gap-grid-gutter relative">
+<!-- Grid Lines (Horizontal) -->
+<div class="absolute inset-0 pointer-events-none flex flex-col">
+<div class="h-16 border-b border-surface-variant/50 w-full"></div>
+<div class="h-16 border-b border-surface-variant/50 w-full"></div>
+<div class="h-16 border-b border-surface-variant/50 w-full"></div>
+<div class="h-16 border-b border-surface-variant/50 w-full"></div>
+<div class="h-16 border-b border-surface-variant/50 w-full"></div>
+<div class="h-16 border-b border-surface-variant/50 w-full"></div>
+<div class="h-16 border-b border-surface-variant/50 w-full"></div>
+<div class="h-16 border-b border-surface-variant/50 w-full"></div>
+<div class="h-16 border-b border-surface-variant/50 w-full"></div>
+<div class="h-16 border-b border-surface-variant/50 w-full"></div>
+</div>
+<!-- Current Time Indicator Line -->
+<div class="absolute w-full h-[2px] bg-error z-20 pointer-events-none" style="top: calc(3.5 * 4rem);">
+<div class="absolute w-2 h-2 rounded-full bg-error -left-1 -top-[3px]"></div>
+</div>
+<!-- Col 1: Mon -->
+<div class="bg-surface-bright relative">
+<!-- Event -->
+<div class="absolute top-[4rem] h-[6rem] left-1 right-1 bg-surface-container-high border-l-[4px] border-primary rounded-md p-2 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-shadow cursor-pointer overflow-hidden group">
+<div class="font-label-md text-on-surface truncate group-hover:text-primary transition-colors">Team Sync</div>
+<div class="font-label-sm text-on-surface-variant truncate">9:00 AM - 10:30 AM</div>
+</div>
+</div>
+<!-- Col 2: Tue -->
+<div class="bg-surface-bright relative">
+<!-- Event -->
+<div class="absolute top-[8rem] h-[4rem] left-1 right-1 bg-[#e0f2fe] border-l-[4px] border-[#0284c7] rounded-md p-2 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-shadow cursor-pointer overflow-hidden group">
+<div class="font-label-md text-on-surface truncate group-hover:text-[#0284c7] transition-colors">Design Review</div>
+<div class="font-label-sm text-on-surface-variant truncate">10:00 AM - 11:00 AM</div>
+</div>
+</div>
+<!-- Col 3: Wed -->
+<div class="bg-surface-bright relative">
+<!-- Event -->
+<div class="absolute top-[12rem] h-[8rem] left-1 right-1 bg-tertiary-fixed border-l-[4px] border-tertiary rounded-md p-2 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-shadow cursor-pointer overflow-hidden group">
+<div class="font-label-md text-on-surface truncate group-hover:text-tertiary transition-colors">Project Review</div>
+<div class="font-label-sm text-on-surface-variant truncate">11:00 AM - 1:00 PM</div>
+<div class="mt-1 flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="font-label-sm truncate">Conference Room B</span>
+</div>
+</div>
+</div>
+<!-- Col 4: Thu -->
+<div class="bg-surface-bright relative">
+<!-- Event -->
+<div class="absolute top-[16rem] h-[4rem] left-1 right-1 bg-[#dcfce7] border-l-[4px] border-[#16a34a] rounded-md p-2 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-shadow cursor-pointer overflow-hidden group">
+<div class="font-label-md text-on-surface truncate group-hover:text-[#16a34a] transition-colors">Client Call</div>
+<div class="font-label-sm text-on-surface-variant truncate">12:00 PM - 1:00 PM</div>
+</div>
+</div>
+<!-- Col 5: Fri -->
+<div class="bg-surface-bright relative">
+<!-- Event -->
+<div class="absolute top-[24rem] h-[6rem] left-1 right-1 bg-[#fef08a] border-l-[4px] border-[#ca8a04] rounded-md p-2 hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] transition-shadow cursor-pointer overflow-hidden group">
+<div class="font-label-md text-on-surface truncate group-hover:text-[#ca8a04] transition-colors">Weekly Planning</div>
+<div class="font-label-sm text-on-surface-variant truncate">2:00 PM - 3:30 PM</div>
+</div>
+</div>
+<!-- Col 6: Sat -->
+<div class="bg-surface-bright relative opacity-80"></div>
+<!-- Col 7: Sun -->
+<div class="bg-surface-bright relative opacity-80"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
